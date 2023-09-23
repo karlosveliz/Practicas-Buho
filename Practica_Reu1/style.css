@@ -104,6 +104,7 @@ textarea{
     border-radius: 7px;
     width: 150px;
     border-color: rgb(29, 29, 255);
+    cursor: pointer;
 }
 
 .spacio{
