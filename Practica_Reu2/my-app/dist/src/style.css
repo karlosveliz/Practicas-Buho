@@ -1,0 +1,11 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.titulo{
+    background: linear-gradient(45deg, rgb(37, 36, 36), rgb(63, 61, 61), rgb(90, 88, 88), rgb(116, 113, 113));
+    color: rgb(240, 248, 255);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
