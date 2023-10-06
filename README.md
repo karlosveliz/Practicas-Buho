@@ -1,6 +1,9 @@
-# Practicas-Buho
+# Practica_Reau2
 
-Practicante:Veliz Ortiz Karlos Manuel
+## Instalacion del framework
 
-En este folder se guardara las practicas que realisare sobre la empresa
-  
+![Alt text](image-1.png)
+
+## Creacion de pagina
+
+![Alt text](image.png)
