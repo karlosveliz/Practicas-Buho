@@ -1,9 +1,2 @@
-# Practica_Reau2
+# Practica_Buho
 
-## Instalacion del framework
-
-![Alt text](image-1.png)
-
-## Creacion de pagina
-
-![Alt text](image.png)
