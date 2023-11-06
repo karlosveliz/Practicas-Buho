@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload JavaScript with Progress Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--canbiamos el color de fondo por un video-->
+  <div id="background-video-container"><!--creamos un div par poder agregar un video --> 
+    <video id="background-video" autoplay loop muted>
+      <source src="video/video1.mp4" type="video/mp4"><!--este seria el enlace del video-->
+    </video>
+  </div>
+  <div class="wrapper">
+    <header>File Uploader JavaScript</header>
+    <form action="#">
+      <input class="file-input" type="file" name="file" hidden>
+      <i class="fas fa-cloud-upload-alt"></i>
+      <p>Browse File to Upload</p>
+    </form>
+    <section class="progress-area"></section>
+    <section class="uploaded-area"></section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
