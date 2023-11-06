@@ -19,14 +19,15 @@ fileInput.onchange = ({target})=>{
   }
 }
 
+
 function uploadFile(name){
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "php/upload.php");
-  xhr.upload.addEventListener("progress", ({loaded, total}) =>{
+  xhr.upload.addEventListener("progress", ({loaded, total}) => {
     let fileLoaded = Math.floor((loaded / total) * 100);
     let fileTotal = Math.floor(total / 1000);
     let fileSize;
-    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
+    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024 * 1024)).toFixed(2) + " MB";
     let progressHTML = `<li class="row">
                           <i class="fas fa-file-alt"></i>
                           <div class="content">
@@ -39,24 +40,70 @@ function uploadFile(name){
                             </div>
                           </div>
                         </li>`;
+
     uploadedArea.classList.add("onprogress");
     progressArea.innerHTML = progressHTML;
-    if(loaded == total){
+
+    if (loaded == total) {
       progressArea.innerHTML = "";
-      let uploadedHTML = `<li class="row">
-                            <div class="content upload">
-                              <i class="fas fa-file-alt"></i>
-                              <div class="details">
-                                <span class="name">${name} • Uploaded</span>
-                                <span class="size">${fileSize}</span>
-                              </div>
-                            </div>
-                            <i class="fas fa-check"></i>
-                          </li>`;
+      // Llamar a la función para agregar el archivo cargado
+      addUploadedFile(name, fileSize);
       uploadedArea.classList.remove("onprogress");
-      uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
     }
   });
+
   let data = new FormData(form);
   xhr.send(data);
 }
+
+function addUploadedFile(name, fileSize) {
+  const uploadedFile = document.createElement("li");
+  uploadedFile.className = "row";
+  uploadedFile.innerHTML = `
+    <i class="fas fa-file-alt"></i>
+    <div class="content">
+      <div class="details">
+        <span class="name">${name} • Uploaded</span>
+        <span class="size">${fileSize}</span>
+      </div>
+      <div class="file-actions">
+        <button class="download-button">Descargar</button><br>
+        <button class="delete-button">Eliminar</button>
+      </div>
+    </div>
+  `;
+
+  // Agregar eventos a los botones de Descargar y Eliminar
+  const downloadButton = uploadedFile.querySelector(".download-button");
+  const deleteButton = uploadedFile.querySelector(".delete-button");
+
+  downloadButton.addEventListener("click", () => {
+    // Lógica para descargar el archivo aquí
+    window.location.href = "uploads/" + name;
+  });
+
+  deleteButton.addEventListener("click", () => {
+    // Lógica para eliminar el archivo aquí
+    fetch("php/delete.php", {
+      method: "POST",
+      body: JSON.stringify({ filename: name }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "success") {
+        uploadedArea.removeChild(uploadedFile);
+      } else {
+        console.error(data.message);
+      }
+    })
+    .catch(error => {
+      console.error("Error al eliminar el archivo:", error);
+    });
+  });
+
+  uploadedArea.appendChild(uploadedFile);
+}
+

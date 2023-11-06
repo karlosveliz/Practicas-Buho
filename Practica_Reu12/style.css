@@ -12,6 +12,23 @@ body{
   justify-content: center;
   min-height: 100vh;
 }
+.download-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Estilos para el botón de eliminación */
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
 /*canbiamos el color de fondo por un video*/
 #background-video-container {
   position: fixed;
